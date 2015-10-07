@@ -5,19 +5,19 @@
  * @author Martijn van der Bruggen
  * @version alpha - aanroep van cruciale methodes ontbreekt
  * (c) 2009 Hogeschool van Arnhem en Nijmegen
- *
+ * <p/>
  * Note: deze code is bewust niet op alle punten generiek
  * dit om nog onbekende constructies te vermijden.
- *
+ * <p/>
  * Updates
  * 2010: verduidelijking van opdrachten in de code MvdB
  * 2011: verbetering leesbaarheid code MvdB
  * 2012: verbetering layout code en aanpassing commentaar MvdB
  * 2013: commentaar aangepast aan nieuwe opdracht MvdB
- *
- *************************************************
+ * <p/>
+ * ************************************************
  * Afvinkopdracht: werken met methodes en objecten
- *************************************************
+ * ************************************************
  * Opdrachten zitten verwerkt in de code
  * 1) Declaratie constante
  * 2) Declaratie van Paard (niet instantiering)
@@ -29,12 +29,16 @@
  * 8) Teken 4 paarden
  * 9) Plaats tekst op de button
  * 10) Start de race, methode aanroep
- *
- *
  */
+
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class Race extends JFrame implements ActionListener {
@@ -53,7 +57,7 @@ public class Race extends JFrame implements ActionListener {
 
     /** Applicatie - main functie voor runnen applicatie */
     public Race() {
-        setSize(400,150);
+        setSize(400, 150);
         setTitle("Paardenrace");
     }
 
@@ -73,6 +77,12 @@ public class Race extends JFrame implements ActionListener {
 
         g.setColor(Color.red);
         g.fillRect(lengte, 0, 3, 240);
+        BufferedImage pferd = null;
+        try {
+            pferd = ImageIO.read(new File("//home//richard//Desktop//pferdje.png"));
+        } catch (IOException e) {
+            System.out.println(" meh ");
+        }
         /**(6) Creatie van 4 paarden
          * Dit is een instantiering van de 4 paard objecten
          * Bij de instantiering geef je de paarden een naam en een kleur mee
@@ -134,7 +144,7 @@ public class Race extends JFrame implements ActionListener {
         window.add(panel);
 
         /* (9) Zet hier de tekst Run! op de button */
-        button = new JButton ("Run!");
+        button = new JButton("Run!");
         window.add(button);
         button.addActionListener(this);
     }
@@ -150,13 +160,13 @@ public class Race extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Graphics paper = panel.getGraphics();
         /* (10) Roep hier de methode startrace aan met de juiste parameterisering */
-        startRace (paper);
+        startRace(paper);
     }
 
     /** Pauzeer gedurende x millisecondes*/
     public void pauzeer() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             System.out.println("Pauze interruptie");
         }
